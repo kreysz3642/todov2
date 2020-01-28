@@ -5,29 +5,45 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import style from './App.module.css'
 import { ButtonGroup } from '@material-ui/core'
+import axios from 'axios'
 
 
 
 class App extends React.Component {
 
-  initialState = () =>{
-    let localTasks = JSON.parse(localStorage.getItem('tasks'))
-    if(localTasks !== null){
-      this.setState({tasks : localTasks})
-    }
-  }
+  
+
+  
 
   constructor(){
     super()
 
-    let localTasks = JSON.parse(localStorage.getItem('tasks'))
-
     this.state = {
       input : "",
-      tasks: localTasks !== null ? localTasks : []
+      tasks: []
     }
+
+    axios.get('http://localhost:8000/reciveTasks', {headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        }     
+    }).then(res => {
+       this.setState({tasks : res.data.map(task => ({
+         
+        id : task._id,
+        text : task.text,
+        done : task.done
+     }))})
+      
+    }, 
+    error => {
+      console.log("Ошибка загрузки данных")
+    })
+
+
   }
 
+  
   
 
   render(){  
@@ -77,6 +93,7 @@ class App extends React.Component {
     this.setState({tasks : tasks})
   }
 
+
   setDone = id =>{
     let { tasks } = this.state;
 
@@ -99,24 +116,32 @@ class App extends React.Component {
   }
 
   addNewTask = () =>{
-    console.log(this.state.tasks)
+    
+
     if(this.state.input){
       let {tasks} = this.state
       
-      tasks.push({
-        id: Math.floor(Math.random() * (100000000 - 1)) + 1,
+      let newTask = {
+        id: "",
         text: this.state.input,
         done: false
-      })
-
-      this.setState({
-        tasks,
-        input : ''
-      })
-      localStorage.setItem('tasks', JSON.stringify(tasks))
+      }
+      
+      
+     
+      
+      axios.post('http://localhost:8000/addTask', { newTask } ).then(
+        result => {
+          console.log(result.data.taskId)
+          newTask.id = result.data.taskId
+          tasks.push(newTask)
+          this.setState(tasks)
+        }
+      )
     }
   }
 
+ 
   
   
 }
