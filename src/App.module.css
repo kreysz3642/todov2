@@ -1,0 +1,57 @@
+.App{
+    margin-top: 20px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.Tasks{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+
+}
+
+
+.App > p{
+    font-size: 30pt;
+}
+
+.ToDoElements{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+}
+.addNewTaskArea{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 20px 0;
+    height: 50px;
+}
+
+.AddTaskButton{
+    height: 40px;
+    
+}
+.TextField{
+ width: 200px;
+ height: 50px;
+ margin-right: 50px;
+}
+.ControllButtons{
+    height: 45px;
+}
+.ControllButtonGroup{
+    height: 45px;
+}
+
+.ClearButton{
+    margin-left: 25px !important;
+    margin-top: 0px !important;
+    height: 45px;
+    
+}

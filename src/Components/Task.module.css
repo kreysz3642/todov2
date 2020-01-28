@@ -1,0 +1,10 @@
+.taskStyle{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.taskStyle p{
+    margin: 0;
+    font-size: 20pt;
+}
