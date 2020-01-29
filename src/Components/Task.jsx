@@ -7,7 +7,7 @@ const Task = ({task, setDone}) =>{
     <div className={style.taskStyle}>
         <div>
             <div>
-                <Checkbox  color="primary" type="checkbox"   onChange={() => setDone(task.id)} checked={task.done}/>
+                <Checkbox  color="primary" type="checkbox"   onChange={() => setDone(task._id)} checked={task.done}/>
             </div>
         </div>
     <p>{task.text}</p>

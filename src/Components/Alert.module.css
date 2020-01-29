@@ -1,0 +1,8 @@
+.Alert{
+    font-size: 15px;
+    color: rgb(228, 25, 25);
+    display: block;
+    padding: 4px;
+    border: 2px solid rgb(228, 25, 25);
+    border-radius: 5px;
+}
